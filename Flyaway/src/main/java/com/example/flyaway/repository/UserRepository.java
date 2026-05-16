@@ -1,7 +1,12 @@
-package com.example.hola.repository;
+package com.example.flyaway.repository;
 
-import com.example.hola.model.User;
+import com.example.flyaway.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository extends JpaRepository<User, Integer> {
+import java.util.Optional;
+
+public interface UserRepository extends JpaRepository<User, Long> {
+    boolean existsByEmail(String email);
+
+    Optional<User> findByEmail(String email);
 }

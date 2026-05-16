@@ -1,31 +1,58 @@
-package com.example.hola.dto;
+package com.example.flyaway.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class UserDTO {
     @NotBlank
-    private String username;
+    @Pattern(regexp = "^(?=.*[A-Z])[A-Za-z]+$")
+    private String firstName;
+
     @NotBlank
-    private String password;
+    @Pattern(regexp = "^(?=.*[A-Z])[A-Za-z]+$")
+    private String lastName;
+
     @NotBlank
     @Email
+    @Pattern(regexp = "^[A-Za-z0-9_.+-]+@[A-Za-z0-9_.-]+\\.[A-Za-z]{2,}$")
     private String email;
+
     @NotBlank
-    @Pattern(regexp = ".*[A-Z].*", message = "La contraseña debe contener al menos una letra mayúscula")
-    private String firstName;
-    @NotBlank
-    @Pattern(regexp = ".*[A-Z].*", message = "La contraseña debe contener al menos una letra mayúscula")
-    private String lastName;
-    
-    
+    @Size(min = 8)
+    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*[0-9]).+$")
+    private String password;
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

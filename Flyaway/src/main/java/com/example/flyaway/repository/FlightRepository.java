@@ -1,9 +1,21 @@
-package com.example.hola.repository;
+package com.example.flyaway.repository;
 
-import com.example.hola.model.Flight;
+import com.example.flyaway.model.Flight;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface FlightRepository extends JpaRepository<Flight, Long> {
+import java.time.Instant;
+import java.util.List;
 
-    boolean existsByNumeroVuelo(String numeroVuelo);
+public interface FlightRepository extends JpaRepository<Flight, Long> {
+    boolean existsByFlightNumber(String flightNumber);
+
+    List<Flight> findByFlightNumberContainingIgnoreCaseOrderByIdAsc(String flightNumber);
+
+    List<Flight> findByAirlineNameContainingIgnoreCaseOrderByIdAsc(String airlineName);
+
+    List<Flight> findByEstDepartureTimeGreaterThanEqualOrderByIdAsc(Instant from);
+
+    List<Flight> findByEstDepartureTimeLessThanEqualOrderByIdAsc(Instant to);
+
+    List<Flight> findAllByOrderByIdAsc();
 }
